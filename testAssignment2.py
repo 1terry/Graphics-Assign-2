@@ -69,10 +69,10 @@ camera = cameraMatrix(window,P,E,G,NP,FP,THETA) #Set camera viewing system
 
 plane = parametricPlane(planeT,planeWidth,planeLength,planeCol,planeRef,(0.0,1.0),(0.0,1.0),(1.0/10.0,1.0/10.0))
 circle = parametricCircle(circleT,circleRadius,circleCol,circleRef,(0.0,1.0),(0.0,2.0*pi),(1.0/10.0,pi/18.0))
-sphere = parametricSphere(sphereT,sphereRadius,sphereCol,sphereRef,(0.0,2.0*pi),(0.0,pi),(pi/18.0,pi/18.0))
 cone = parametricCone(coneT,coneHeight,coneRadius,coneCol,coneRef,(0.0,1.0),(0.0,2.0*pi),(1.0/10.0,pi/18.0))
 cylinder = parametricCylinder(cylinderT,cylinderHeight,cylinderRadius,cylinderCol,cylinderRef,(0.0,1.0),(0.0,2.0*pi),(1.0/10.0,pi/18.0))
 torus = parametricTorus(torusT,torusInnerRadius,torusOuterRadius,torusCol,torusRef,(0.0,2.0*pi),(0.0,2.0*pi),(pi/18.0,pi/9.0))
+sphere = parametricSphere(sphereT,sphereRadius,sphereCol,sphereRef,(0.0,2.0*pi),(0.0,pi),(pi/18.0,pi/18.0))
 
 window.drawWireMesh(wireMesh([plane,circle,sphere,cone,cylinder,torus],camera).getFaceList())
 window.saveImage("assignment2Image.png")
