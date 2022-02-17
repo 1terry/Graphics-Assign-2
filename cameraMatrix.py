@@ -2,7 +2,6 @@ import math
 import operator
 from math import *
 import numpy as np
-from pyrsistent import T
 from matrix import matrix
 
 class cameraMatrix:
@@ -45,20 +44,30 @@ class cameraMatrix:
         uy = uTranspose.get(0,1)
         uz = uTranspose.get(0,2)
 
-        vx = vTranspose.get(1,0)
-        vy = vTranspose.get(1,1)
-        vz = vTranspose.get(1,2)
+        vx = vTranspose.get(0,0)
+        vy = vTranspose.get(0,1)
+        vz = vTranspose.get(0,2)
 
-        nx = nTranspose.get(2,0)
-        ny = nTranspose.get(2,1)
-        nz = nTranspose.get(2,2)
+        nx = nTranspose.get(0,0)
+        ny = nTranspose.get(0,1)
+        nz = nTranspose.get(0,2)
 
-        right1 = -E* U
-        right2 = -E * V
-        right3 = -E * N
-        right4 = 1
+        # Gets the right E values
+        
+        U = U.insertRow(3,0)
+        V = V.insertRow(3,0)
+        N = N.insertRow(3,0)
+        E = E.scalarMultiply(-1)
+        # print(E.getNumberOfRows())
+        # print(E.getNumberOfColumns())
+        # print(U)
+        # print(U.getNumberOfColumns())
+        
+        right1 = E.dotProduct(U)
+        right2 = E.dotProduct(V)
+        right3 = E.dotProduct(N)
 
-        MV = matrix(np.zeros(4,4))
+        MV = matrix(np.zeros((4,4)))
         MV.set(0, 0, ux)
         MV.set(0, 1, uy)
         MV.set(0, 2, uz)
@@ -77,8 +86,8 @@ class cameraMatrix:
         MV.set(3, 0, 0)
         MV.set(3, 1, 0)
         MV.set(3, 2, 0)
-        MV.set(3, 3, right4)
-
+        MV.set(3, 3, 1)
+        print(MV)
         return MV
 
     def __setMp(self,nearPlane,farPlane):
@@ -86,7 +95,7 @@ class cameraMatrix:
         varB = (-2 * farPlane * nearPlane) / (farPlane - nearPlane)
         varA = (nearPlane + varB) / nearPlane
 
-        MP = matrix(np.zeros(4,4))
+        MP = matrix(np.zeros((4,4)))
         MP.set(0, 0, nearPlane)
         MP.set(1, 1, nearPlane)
         MP.set(2, 2, varA)
@@ -102,7 +111,7 @@ class cameraMatrix:
         varR = aspect * varT
         varL = -varR
 
-        T1 = matrix(np.zeros(4,4))
+        T1 = matrix(np.zeros((4,4)))
         T1.set(0, 0, 1)
         T1.set(0, 3, -(varR + varL)/2)
         T1.set(1, 1, 1)
@@ -119,7 +128,7 @@ class cameraMatrix:
         varR = aspect * varT
         varL = -varR
 
-        S1 = matrix(np.zeros(4,4))
+        S1 = matrix(np.zeros((4,4)))
         S1.set(0, 0, 2/(varR - varL))
         S1.set(1, 1, 2/(varT - varB))
         S1.set(2, 2, 1)
@@ -129,7 +138,7 @@ class cameraMatrix:
 
     def __setT2(self):
 
-        T2 = matrix(np.zeros(4, 4))
+        T2 = matrix(np.zeros((4,4)))
         T2.set(0, 0, 1)
         T2.set(0, 3, 1)
         T2.set(1, 1, 1)
@@ -141,7 +150,7 @@ class cameraMatrix:
 
     def __setS2(self,width,height):
         
-        S2 = matrix(np.zeros(4, 4))
+        S2 = matrix(np.zeros((4,4)))
         S2.set(0, 0, width/2)
         S2.set(1, 1, height/2)
         S2.set(2, 2, 1)
@@ -151,7 +160,7 @@ class cameraMatrix:
 
     def __setW2(self,height):
 
-        W2 = matrix(np.zeros(4, 4))
+        W2 = matrix(np.zeros((4,4)))
         W2.set(0, 0, 1)
         W2.set(1, 1, -1)
         W2.set(1, 3, height)

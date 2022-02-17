@@ -75,5 +75,5 @@ torus = parametricTorus(torusT,torusInnerRadius,torusOuterRadius,torusCol,torusR
 sphere = parametricSphere(sphereT,sphereRadius,sphereCol,sphereRef,(0.0,2.0*pi),(0.0,pi),(pi/18.0,pi/18.0))
 
 window.drawWireMesh(wireMesh([plane,circle,sphere,cone,cylinder,torus],camera).getFaceList())
-window.saveImage("assignment2Image.png")
+window.saveImage("NEWassignment2Image.png")
 window.showImage()
