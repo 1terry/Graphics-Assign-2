@@ -19,7 +19,7 @@ class parametricPlane(parametricObject):
 
         '''
     Terrence Ju, Feb 18, 2022
-    getPoint method creates a parametric plane
+    getPoint method creates a point on parametric plane
     Takes in params U, V, returns a matrix
     '''
     def getPoint(self,u,v):

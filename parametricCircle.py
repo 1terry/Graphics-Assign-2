@@ -19,7 +19,7 @@ class parametricCircle(parametricObject):
 
     '''
     Terrence Ju, Feb 18, 2022
-    getPoint method creates a parametric circle
+    getPoint method creates a point on the circle
     Takes in params U, V, returns a matrix
     '''
     def getPoint(self,u,v):

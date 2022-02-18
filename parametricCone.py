@@ -19,7 +19,7 @@ class parametricCone(parametricObject):
 
     '''
     Terrence Ju, Feb 18, 2022
-    getPoint method creates a parametric cone
+    getPoint method creates a point on parametric cone
     Takes in params U, V, returns a matrix
     '''
     def getPoint(self,u,v):
