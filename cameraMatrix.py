@@ -51,8 +51,8 @@ class cameraMatrix:
         vTranspose = V.transpose()
         nTranspose = N.transpose()
 
-        # Gets the x,y,z values for transposed matrices
-        ux = uTranspose.get(0,0)    # Vals for matrix u
+        # Gets the x,y,z values for transposed matrices, starting with matrix u
+        ux = uTranspose.get(0,0)    
         uy = uTranspose.get(0,1)
         uz = uTranspose.get(0,2)
 
@@ -64,7 +64,7 @@ class cameraMatrix:
         ny = nTranspose.get(0,1)
         nz = nTranspose.get(0,2)
 
-        # Increases size of U V and N, so it can be multiplied by E
+        # Increases size of U V and N, so it can be dot producted by E
         U = U.insertRow(3,0)
         V = V.insertRow(3,0)
         N = N.insertRow(3,0)
